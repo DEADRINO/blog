@@ -6,7 +6,7 @@ User = get_user_model()
 
 class ObjectsManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset()[:500]
+        return super().get_queryset()[:500].filter()
 
 
 class Post(models.Model):
@@ -15,6 +15,7 @@ class Post(models.Model):
     content = models.TextField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
